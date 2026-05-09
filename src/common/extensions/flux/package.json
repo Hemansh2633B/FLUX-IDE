@@ -9,7 +9,10 @@
     "vscode": "^1.90.0"
   },
   "activationEvents": [
-    "onLanguage:flux"
+    "onLanguage:flux",
+    "onCommand:flux.showIr",
+    "onCommand:flux.inspectMemory",
+    "onView:fluxProfiler"
   ],
   "categories": [
     "Programming Languages"
@@ -32,6 +35,14 @@
         }
       }
     ],
+    "views": {
+        "flux-explorer": [
+            {
+                "id": "fluxProfiler",
+                "name": "Performance (Profiler)"
+            }
+        ]
+    },
     "grammars": [
       {
         "language": "flux",
@@ -52,6 +63,49 @@
             "path": "./icons/flux-icons.json"
         }
     ],
+    "commands": [
+        {
+            "command": "flux.showIr",
+            "title": "Flux: Open LLVM IR View",
+            "category": "Flux"
+        },
+        {
+            "command": "flux.inspectMemory",
+            "title": "Flux: Inspect Memory",
+            "category": "Flux"
+        },
+        {
+            "command": "flux.startProfiling",
+            "title": "Flux: Start Profiling",
+            "category": "Flux"
+        },
+        {
+            "command": "flux.stopProfiling",
+            "title": "Flux: Stop Profiling",
+            "category": "Flux"
+        }
+    ],
+    "menus": {
+        "editor/title": [
+            {
+                "command": "flux.showIr",
+                "when": "resourceExtname == .fx",
+                "group": "navigation"
+            }
+        ],
+        "view/title": [
+            {
+                "command": "flux.inspectMemory",
+                "when": "debugType == flux",
+                "group": "navigation"
+            },
+            {
+                "command": "flux.startProfiling",
+                "when": "view == fluxProfiler",
+                "group": "navigation"
+            }
+        ]
+    },
     "configuration": {
       "title": "Flux",
       "properties": {

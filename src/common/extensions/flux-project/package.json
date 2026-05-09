@@ -14,9 +14,27 @@
     "onCommand:flux.fpmUpdate",
     "onCommand:flux.fpmList",
     "onCommand:flux.fpmAddSource",
+    "onView:fluxPackages",
     "workspaceContains:flux.toml"
   ],
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "flux-explorer",
+          "title": "Flux",
+          "icon": "resources/flux.svg"
+        }
+      ]
+    },
+    "views": {
+      "flux-explorer": [
+        {
+          "id": "fluxPackages",
+          "name": "Packages (FPM)"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "flux.createProject",
@@ -42,8 +60,22 @@
         "command": "flux.fpmAddSource",
         "title": "FPM: Add Source",
         "category": "Flux"
+      },
+      {
+        "command": "flux.refreshPackages",
+        "title": "Refresh Packages",
+        "icon": "$(refresh)"
       }
     ],
+    "menus": {
+        "view/title": [
+            {
+                "command": "flux.refreshPackages",
+                "when": "view == fluxPackages",
+                "group": "navigation"
+            }
+        ]
+    },
     "configuration": {
       "title": "Flux",
       "properties": {

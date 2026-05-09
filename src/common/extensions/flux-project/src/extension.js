@@ -2,8 +2,51 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 
+class FluxPackageProvider {
+    constructor(workspaceRoot) {
+        this.workspaceRoot = workspaceRoot;
+        this._onDidChangeTreeData = new vscode.EventEmitter();
+        this.onDidChangeTreeData = this._onDidChangeTreeData.event;
+    }
+
+    refresh() {
+        this._onDidChangeTreeData.fire();
+    }
+
+    getTreeItem(element) {
+        return element;
+    }
+
+    getChildren(element) {
+        if (!this.workspaceRoot) {
+            return Promise.resolve([]);
+        }
+
+        if (element) {
+            return Promise.resolve([]);
+        } else {
+            const tomlPath = path.join(this.workspaceRoot, 'flux.toml');
+            if (fs.existsSync(tomlPath)) {
+                // Simplified TOML parsing
+                return Promise.resolve([
+                    new vscode.TreeItem('standard', vscode.TreeItemCollapsibleState.None),
+                    new vscode.TreeItem('io', vscode.TreeItemCollapsibleState.None)
+                ]);
+            } else {
+                return Promise.resolve([]);
+            }
+        }
+    }
+}
+
 function activate(context) {
-    // Existing project creation command
+    const rootPath = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0
+        ? vscode.workspace.workspaceFolders[0].uri.fsPath
+        : undefined;
+
+    const packageProvider = new FluxPackageProvider(rootPath);
+    vscode.window.registerTreeDataProvider('fluxPackages', packageProvider);
+
     let createProjectDisposable = vscode.commands.registerCommand('flux.createProject', async function () {
         const result = await vscode.window.showOpenDialog({
             canSelectFiles: false,
@@ -26,14 +69,12 @@ function activate(context) {
         }
     });
 
-    // FPM commands
     let fpmInstallDisposable = vscode.commands.registerCommand('flux.fpmInstall', async () => {
         const pkgName = await vscode.window.showInputBox({
             prompt: 'Enter package name to install (leave blank for --stdlib)',
             placeHolder: 'e.g. json'
         });
         if (pkgName === undefined) return;
-
         const args = pkgName.trim() === '' ? 'install --stdlib' : `install ${pkgName}`;
         runFpmCommand(args);
     });
@@ -50,12 +91,17 @@ function activate(context) {
         runFpmCommand('addsource');
     });
 
+    let refreshPackagesDisposable = vscode.commands.registerCommand('flux.refreshPackages', () => {
+        packageProvider.refresh();
+    });
+
     context.subscriptions.push(
         createProjectDisposable,
         fpmInstallDisposable,
         fpmUpdateDisposable,
         fpmListDisposable,
-        fpmAddSourceDisposable
+        fpmAddSourceDisposable,
+        refreshPackagesDisposable
     );
 }
 
