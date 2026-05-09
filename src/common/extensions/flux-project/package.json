@@ -1,0 +1,33 @@
+{
+  "name": "flux-project",
+  "displayName": "Flux Project Support",
+  "description": "Project management for Flux",
+  "version": "0.1.0",
+  "publisher": "flux",
+  "main": "./extension.js",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onCommand:flux.createProject",
+    "workspaceContains:flux.toml"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "flux.createProject",
+        "title": "Flux: Create New Project"
+      }
+    ],
+    "configuration": {
+      "title": "Flux",
+      "properties": {
+        "flux.compilerPath": {
+          "type": "string",
+          "default": "fluxc",
+          "description": "Path to the fluxc compiler"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "flux",
+  "displayName": "Flux Language Support",
+  "description": "Flux programming language support for Flux IDE",
+  "version": "0.1.0",
+  "publisher": "flux",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "flux",
+        "aliases": [
+          "Flux",
+          "flux"
+        ],
+        "extensions": [
+          ".fx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "flux",
+        "scopeName": "source.fx",
+        "path": "./syntaxes/flux.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "flux",
+        "path": "./snippets/flux.code-snippets"
+      }
+    ]
+  }
+}

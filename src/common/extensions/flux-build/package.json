@@ -1,0 +1,43 @@
+{
+  "name": "flux-build",
+  "displayName": "Flux Build System",
+  "description": "Build system integration for Flux",
+  "version": "0.1.0",
+  "publisher": "flux",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "contributes": {
+    "taskDefinitions": [
+      {
+        "type": "flux",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "The flux command to run"
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "fluxc",
+        "owner": "flux",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        }
+      }
+    ]
+  }
+}
