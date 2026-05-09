@@ -1,0 +1,40 @@
+{
+  "Main Function": {
+    "prefix": "main",
+    "body": [
+      "def main() -> int",
+      "{",
+      "\t${0}",
+      "\treturn 0;",
+      "};"
+    ],
+    "description": "Flux main function"
+  },
+  "Println": {
+    "prefix": "println",
+    "body": [
+      "println(\"${1}\");"
+    ],
+    "description": "Print line"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:Name}",
+      "{",
+      "\t${0}",
+      "};"
+    ],
+    "description": "Define a struct"
+  },
+  "Object": {
+    "prefix": "object",
+    "body": [
+      "object ${1:Name}",
+      "{",
+      "\t${0}",
+      "};"
+    ],
+    "description": "Define an object"
+  }
+}
