@@ -3,8 +3,8 @@
     "tasks": [
         {
             "label": "Flux: Build",
-            "type": "shell",
-            "command": "fluxc build",
+            "type": "flux",
+            "command": "build",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -13,8 +13,8 @@
         },
         {
             "label": "Flux: Run",
-            "type": "shell",
-            "command": "fluxc run",
+            "type": "flux",
+            "command": "run",
             "group": {
                 "kind": "test",
                 "isDefault": true

@@ -14,7 +14,7 @@ on:
         description: Disable dispatch
 
 env:
-  APP_NAME: VSCodium
+  APP_NAME: Flux IDE
   ASSETS_REPOSITORY: ${{ github.repository }}
   BINARY_NAME: codium
   GH_REPO_PATH: ${{ github.repository }}

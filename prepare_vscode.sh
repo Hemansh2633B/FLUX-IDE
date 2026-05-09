@@ -13,6 +13,14 @@ fi
 mkdir -p vscode/extensions
 cp -rp src/common/extensions/* vscode/extensions/
 
+# Install dependencies for Flux extensions
+for ext in vscode/extensions/flux*; do
+  if [ -f "$ext/package.json" ]; then
+    echo "Installing dependencies for extension: $ext"
+    (cd "$ext" && npm install --no-package-lock)
+  fi
+done
+
 cp -f LICENSE vscode/LICENSE.txt
 
 cd vscode || { echo "'vscode' dir not found"; exit 1; }
@@ -284,7 +292,7 @@ if [[ "${OS_NAME}" == "linux" ]]; then
   sed -i 's|https://code.visualstudio.com/docs/setup/linux|https://github.com/kvthweatt/Flux|' resources/linux/rpm/code.spec.template
   sed -i 's|https://code.visualstudio.com|https://vscodium.com|' resources/linux/rpm/code.spec.template
 
-  # snapcraft.yaml
+  # rpm/code.spec.template
   sed -i 's|Visual Studio Code|Flux IDE|' resources/linux/rpm/code.spec.template
 elif [[ "${OS_NAME}" == "windows" ]]; then
   # code.iss

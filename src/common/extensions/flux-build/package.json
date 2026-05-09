@@ -4,9 +4,13 @@
   "description": "Build system integration for Flux",
   "version": "0.1.0",
   "publisher": "flux",
+  "main": "./src/extension.js",
   "engines": {
     "vscode": "^1.90.0"
   },
+  "activationEvents": [
+    "onTaskType:flux"
+  ],
   "contributes": {
     "taskDefinitions": [
       {
@@ -17,7 +21,7 @@
         "properties": {
           "command": {
             "type": "string",
-            "description": "The flux command to run"
+            "description": "The flux command to run (e.g., build, run)"
           }
         }
       }

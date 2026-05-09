@@ -4,21 +4,78 @@
   "description": "Project management for Flux",
   "version": "0.1.0",
   "publisher": "flux",
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "engines": {
     "vscode": "^1.90.0"
   },
   "activationEvents": [
     "onCommand:flux.createProject",
+    "onCommand:flux.fpmInstall",
+    "onCommand:flux.fpmUpdate",
+    "onCommand:flux.fpmList",
+    "onCommand:flux.fpmAddSource",
+    "onView:fluxPackages",
     "workspaceContains:flux.toml"
   ],
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "flux-explorer",
+          "title": "Flux",
+          "icon": "resources/flux.svg"
+        }
+      ]
+    },
+    "views": {
+      "flux-explorer": [
+        {
+          "id": "fluxPackages",
+          "name": "Packages (FPM)"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "flux.createProject",
-        "title": "Flux: Create New Project"
+        "title": "Flux: Create New Project",
+        "category": "Flux"
+      },
+      {
+        "command": "flux.fpmInstall",
+        "title": "FPM: Install Package",
+        "category": "Flux"
+      },
+      {
+        "command": "flux.fpmUpdate",
+        "title": "FPM: Update All",
+        "category": "Flux"
+      },
+      {
+        "command": "flux.fpmList",
+        "title": "FPM: List Installed",
+        "category": "Flux"
+      },
+      {
+        "command": "flux.fpmAddSource",
+        "title": "FPM: Add Source",
+        "category": "Flux"
+      },
+      {
+        "command": "flux.refreshPackages",
+        "title": "Refresh Packages",
+        "icon": "$(refresh)"
       }
     ],
+    "menus": {
+        "view/title": [
+            {
+                "command": "flux.refreshPackages",
+                "when": "view == fluxPackages",
+                "group": "navigation"
+            }
+        ]
+    },
     "configuration": {
       "title": "Flux",
       "properties": {
@@ -26,6 +83,11 @@
           "type": "string",
           "default": "fluxc",
           "description": "Path to the fluxc compiler"
+        },
+        "flux.fpmPath": {
+          "type": "string",
+          "default": "fpm.py",
+          "description": "Path to the fpm.py script"
         }
       }
     }
