@@ -7,7 +7,7 @@ on:
       - publish-stable
 
 env:
-  APP_NAME: VSCodium
+  APP_NAME: Flux IDE
   ASSETS_REPOSITORY: ${{ github.repository }}
   BINARY_NAME: codium
   GH_REPO_PATH: ${{ github.repository }}
@@ -229,7 +229,7 @@ jobs:
       run:
         shell: bash
     env:
-      APP_IDENTIFIER: VSCodium.VSCodium
+      APP_IDENTIFIER: Flux.FluxIDE
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2

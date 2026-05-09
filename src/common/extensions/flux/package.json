@@ -4,9 +4,13 @@
   "description": "Flux programming language support for Flux IDE",
   "version": "0.1.0",
   "publisher": "flux",
+  "main": "./src/extension.js",
   "engines": {
     "vscode": "^1.90.0"
   },
+  "activationEvents": [
+    "onLanguage:flux"
+  ],
   "categories": [
     "Programming Languages"
   ],
@@ -21,7 +25,11 @@
         "extensions": [
           ".fx"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+            "light": "./icons/flux.png",
+            "dark": "./icons/flux.png"
+        }
       }
     ],
     "grammars": [
@@ -36,6 +44,36 @@
         "language": "flux",
         "path": "./snippets/flux.code-snippets"
       }
-    ]
+    ],
+    "iconThemes": [
+        {
+            "id": "flux-icons",
+            "label": "Flux Icons",
+            "path": "./icons/flux-icons.json"
+        }
+    ],
+    "configuration": {
+      "title": "Flux",
+      "properties": {
+        "flux.pythonPath": {
+          "type": "string",
+          "default": "python3",
+          "description": "Path to the Python interpreter"
+        },
+        "flux.lspPath": {
+          "type": "string",
+          "default": "flsp.py",
+          "description": "Path to the flsp.py script"
+        },
+        "flux.formatterPath": {
+          "type": "string",
+          "default": "fix_spacing.py",
+          "description": "Path to the fix_spacing.py script"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
   }
 }

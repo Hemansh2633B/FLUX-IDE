@@ -7,7 +7,7 @@ on:
       - publish-insider
 
 env:
-  APP_NAME: VSCodium
+  APP_NAME: Flux IDE
   ASSETS_REPOSITORY: ${{ github.repository }}-insiders
   BINARY_NAME: codium-insiders
   GH_REPO_PATH: ${{ github.repository }}
@@ -230,7 +230,7 @@ jobs:
       run:
         shell: bash
     env:
-      APP_IDENTIFIER: VSCodium.VSCodium.Insiders
+      APP_IDENTIFIER: Flux.FluxIDEInsiders
       ASSETS_REPOSITORY: vscodium-insiders
 
     steps:

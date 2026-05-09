@@ -1,0 +1,11 @@
+{
+    "iconDefinitions": {
+        "flux": {
+            "iconPath": "./flux.png"
+        }
+    },
+    "file": "flux",
+    "fileExtensions": {
+        "fx": "flux"
+    }
+}

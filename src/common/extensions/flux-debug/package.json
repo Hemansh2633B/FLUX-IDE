@@ -1,0 +1,25 @@
+{
+  "name": "flux-debug",
+  "displayName": "Flux Debugger",
+  "description": "Debugging support for Flux",
+  "version": "0.1.0",
+  "publisher": "flux",
+  "main": "./src/extension.js",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onDebug"
+  ],
+  "contributes": {
+    "debuggers": [
+      {
+        "type": "flux",
+        "label": "Flux Debug",
+        "languages": [
+          "flux"
+        ]
+      }
+    ]
+  }
+}

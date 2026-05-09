@@ -2,7 +2,21 @@
 
 set -ex
 
-GH_ARCH="amd64"
+case $(uname -m) in
+  x86_64)
+    GH_ARCH="amd64"
+    ;;
+  aarch64)
+    GH_ARCH="arm64"
+    ;;
+  armv7l)
+    GH_ARCH="armv6"
+    ;;
+  *)
+    echo "GH CLI does not support $(uname -m) architecture, skipping installation"
+    exit 0
+    ;;
+esac
 
 for i in {1..5}; do
   TAG=$( curl --retry 12 --retry-delay 30 "https://api.github.com/repos/cli/cli/releases/latest" 2>/dev/null | jq --raw-output '.tag_name' )
